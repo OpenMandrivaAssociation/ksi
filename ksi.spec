@@ -1,6 +1,6 @@
 %define	name	ksi
 %define	version	3.4.2
-%define	release %mkrel 3
+%define	release %mkrel 4
 
 %define major	1
 %define libname %mklibname %{name} %{major}
