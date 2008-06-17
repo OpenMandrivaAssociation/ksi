@@ -17,7 +17,7 @@ Patch0:		ksi-3.4.2-gcc3.4-fix.patch.bz2
 URL:		http://ksi.sourceforge.net/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 # maybe, but i am not sure we should add this.
-# %define _requires_exceptions libgc\.so*
+#define _requires_exceptions libgc\.so*
 
 
 %description
