@@ -1,21 +1,23 @@
 %define	name	ksi
-%define	version	3.4.2
-%define	release %mkrel 6
+%define	version	3.4.3
+%define	release %mkrel 1
 
 %define major	1
 %define libname %mklibname %{name} %{major}
-%define libnamedev %mklibname %{name} %{major} -d
+%define develname %mklibname %{name} -d
+
 
 Version:	%{version}
-Summary:	Implementation of the Scheme programming language
 Name:		%{name}
 Release:	%{release}
+Summary:	Implementation of the Scheme programming language
 License:	BSD
 Group:		Development/Other
-Source0:	%{name}-%{version}.tar.bz2
-Patch0:		ksi-3.4.2-gcc3.4-fix.patch.bz2
 URL:		http://ksi.sourceforge.net/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Source0:	http://downloads.sourceforge.net/ksi/%{name}-%{version}.tar.gz
+BuildRequires:	readline-devel
+BuildRequires:	libgc-devel
+BuildRoot:      %{_tmppath}/%{name}-%{version}
 # maybe, but i am not sure we should add this.
 #define _requires_exceptions libgc\.so*
 
@@ -38,14 +40,14 @@ in C.
 It can be used as both a stand-alone interpreter and an extension library.
 However, the documentation is in Russian.
 
-%package -n	%{libname}-devel
+%package -n	%{develname}
 Group:		Development/Other
 License:	BSD
 Summary:	Implementation of the Scheme programming language
 Requires:	%{libname} = %{version}-%{release}
-Provides:	libksi-devel
+Obsoletes:	%mklibname %{name} -d 1
 
-%description -n	%{libname}-devel
+%description -n	%{develname}
 KSI Scheme is an implementation of the Scheme programming language written 
 in C.
 It can be used as both a stand-alone interpreter and an extension library.
@@ -53,23 +55,22 @@ However, the documentation is in Russian.
 
 %prep
 %setup -q
-%patch0 -p1 -b .gcc3.4
 
 %build
 %configure2_5x
 make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall
 
 # remove misplaced .so files
-rm $RPM_BUILD_ROOT/%{_datadir}/ksi/3.4/*.so
+rm %{buildroot}/%{_datadir}/ksi/3.4/*.so
 
-%multiarch_includes $RPM_BUILD_ROOT/usr/include/ksi/ksi_path.h
+%multiarch_includes %{buildroot}/usr/include/ksi/ksi_path.h
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %post
 %_install_info ksi-lang.info
@@ -111,20 +112,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %exclude %{_bindir}/ksi-config
 %{_infodir}/*
-%dir %{_datadir}/ksi
-%dir %{_datadir}/ksi/3.4
-%{_datadir}/ksi/3.4/*
-%dir %{_datadir}/ksi/app
-%{_datadir}/ksi/app/*
-%dir %{_datadir}/ksi/site
-%{_datadir}/ksi/site/*
+%{_datadir}/ksi
 
 %files -n %{libname}
 %defattr (-,root,root)
 %dir %{_libdir}/ksi
 %{_libdir}/ksi/*.so.*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr (-,root,root)
 %{_bindir}/ksi-config
 %dir %{_includedir}/ksi
