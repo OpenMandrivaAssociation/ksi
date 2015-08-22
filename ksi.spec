@@ -7,10 +7,6 @@
 %define develname %mklibname %{name} -d
 #self provided req.
 %define __noautoreq '/usr/bin/ksi'
-# gold/clang/ crap, only in 32 bit
-%ifarch %{ix86}
-%define _disable_ld_no_undefined 1
-%endif
 
 Version:	%{version}
 Name:		%{name}
@@ -23,6 +19,11 @@ Source0:	http://downloads.sourceforge.net/ksi/%{name}-%{version}.tar.gz
 BuildRequires:	readline-devel
 BuildRequires:	pkgconfig(bdw-gc)
 BuildRequires:	gmp-devel
+
+# gold/clang/ crap, only in 32 bit
+%ifarch %{ix86}
+BuildRequires:	gcc-c++, gcc, gcc-cpp
+%endif
 
 %description
 KSI Scheme is an implementation of the Scheme programming language written 
@@ -80,6 +81,8 @@ However, the documentation is in Russian.
 %setup -q
 
 %build
+export CC=gcc
+export CXX=g++
 autoreconf -fiv
 %configure
 make
