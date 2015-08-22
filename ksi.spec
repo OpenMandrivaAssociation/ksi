@@ -7,6 +7,7 @@
 %define develname %mklibname %{name} -d
 #self provided req.
 %define __noautoreq '/usr/bin/ksi'
+%define _disable_rebuild_configure 1
 
 Version:	%{version}
 Name:		%{name}
@@ -74,11 +75,10 @@ However, the documentation is in Russian.
 
 %prep
 %setup -q
-autoreconf -fiv
 
 %build
 %configure
-make j1
+make
 
 %install
 %makeinstall
