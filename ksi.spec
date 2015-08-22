@@ -20,11 +20,6 @@ BuildRequires:	readline-devel
 BuildRequires:	pkgconfig(bdw-gc)
 BuildRequires:	gmp-devel
 
-# gold/clang/ crap, only in 32 bit
-%ifarch %{ix86}
-BuildRequires:	gcc-c++, gcc, gcc-cpp
-%endif
-
 %description
 KSI Scheme is an implementation of the Scheme programming language written 
 in C. 
@@ -81,10 +76,6 @@ However, the documentation is in Russian.
 %setup -q
 
 %build
-%ifarch %{ix86}
-export CC=gcc
-export CXX=g++
-%endif
 autoreconf -fiv
 %configure
 make
