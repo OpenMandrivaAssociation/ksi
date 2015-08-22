@@ -81,8 +81,10 @@ However, the documentation is in Russian.
 %setup -q
 
 %build
+%ifarch %{ix86}
 export CC=gcc
 export CXX=g++
+%endif
 autoreconf -fiv
 %configure
 make
