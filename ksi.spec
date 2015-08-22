@@ -7,6 +7,10 @@
 %define develname %mklibname %{name} -d
 #self provided req.
 %define __noautoreq '/usr/bin/ksi'
+# gold/clang/ crap, only in 32 bit
+%ifarch %{ix86}
+%define _disable_ld_no_undefined 1
+%endif
 
 Version:	%{version}
 Name:		%{name}
