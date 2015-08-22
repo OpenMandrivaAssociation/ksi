@@ -78,7 +78,7 @@ autoreconf -fiv
 
 %build
 %configure
-make
+make j1
 
 %install
 %makeinstall
