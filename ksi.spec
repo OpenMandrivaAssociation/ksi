@@ -77,7 +77,7 @@ However, the documentation is in Russian.
 
 %build
 autoreconf -fiv
-%configure
+%configure --with-gnu-ld
 make
 
 %install
