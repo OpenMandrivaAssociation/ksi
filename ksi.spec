@@ -75,6 +75,7 @@ However, the documentation is in Russian.
 
 %prep
 %setup -q
+autoreconf -fiv
 
 %build
 %configure
