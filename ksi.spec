@@ -79,7 +79,7 @@ autoreconf -fiv
 
 %build
 %configure
-make
+make -v
 
 %install
 %makeinstall
