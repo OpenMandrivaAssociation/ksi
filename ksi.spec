@@ -15,7 +15,7 @@ Release:	%{release}
 Summary:	Implementation of the Scheme programming language
 License:	BSD
 Group:		Development/Other
-URL:		http://ksi.sourceforge.net/
+URL:		https://ksi.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/ksi/%{name}-%{version}.tar.gz
 BuildRequires:	readline-devel
 BuildRequires:	pkgconfig(bdw-gc)
