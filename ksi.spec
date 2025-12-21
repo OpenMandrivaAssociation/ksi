@@ -17,6 +17,11 @@ License:	BSD
 Group:		Development/Other
 URL:		https://ksi.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/ksi/%{name}-%{version}.tar.gz
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	readline-devel
 BuildRequires:	pkgconfig(bdw-gc)
 BuildRequires:	gmp-devel
